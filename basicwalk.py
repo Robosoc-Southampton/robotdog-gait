@@ -1,6 +1,8 @@
+import numpy
 from spotpuppy.models import quadruped_base
 from spotpuppy.utils.pid_control import pid_controller
-import math, time
+import math
+import time
 
 
 # Must extend the base class
@@ -9,8 +11,20 @@ class quadruped(quadruped_base.quadruped):
         # Initialise the base class
         super().__init__(**kwargs)
 
+        self.state = 2
+        self.trot_speed = numpy.array(2)
+        self.trot_rotation = 0.0
+
         self.t = 0
         self.elapsed = time.time()
+
+    '''
+    def _get_custom_json_params(self):
+        pass
+        
+    def _set_custom_json_params(self):
+        pass
+    '''
 
     def _on_update(self):
         current_time = time.time()
